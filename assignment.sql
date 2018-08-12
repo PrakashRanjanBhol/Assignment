@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 12, 2018 at 09:24 AM
+-- Generation Time: Aug 12, 2018 at 12:36 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -90,9 +90,9 @@ CREATE TABLE `emp_mst` (
 --
 
 INSERT INTO `emp_mst` (`EMP_ID`, `USER_ID`, `FIRST_NAME`, `MIDDLE_NAME`, `LAST_NAME`, `EMAIL_ID`, `MOBILE_NO`, `ADDRESS`) VALUES
-(11, 12, 'Ramesh', 'Kumar', 'Das', 'ramesh@gmail.com', '8987545625', 'Hyderabad'),
-(12, 13, 'Bharat', 'Kumar', 'Das', 'bharat@gmail.com', '8789875456', 'Hyderabad'),
-(13, 14, 'Vinay', 'Kumar', 'Reddy', 'vinay@gmail.com', '8987545658', 'Hyderabad');
+(14, 15, 'Prakash', 'Ranjan', 'Bhol', 'prakash@gmail.com', '8888888888', 'Hyderabad'),
+(15, 16, 'Bikash', 'Ranjan', 'Bhol', 'bikash@gmail.com', '9999999999', 'Hyderabad'),
+(16, 17, 'Rajesh', 'Kumar', 'Roy', 'rajesh@gmail.com', '6666666666', 'Hyderabad');
 
 -- --------------------------------------------------------
 
@@ -115,7 +115,9 @@ CREATE TABLE `emp_performance_mst` (
 --
 
 INSERT INTO `emp_performance_mst` (`PERFORMANCE_ID`, `REVIEW_FROM_ID`, `REVIEW_TO_ID`, `SUBJECT`, `REVIEW`, `RATINGS`, `REVIEW_STATUS`) VALUES
-(9, 11, 12, 'How Bharat is doing?', '', 0, 'N');
+(10, 14, 15, 'How Bikash is working?', 'He is working very good', 9, 'Y'),
+(11, 14, 16, 'How Rajesh is working?', '', 0, 'N'),
+(12, 15, 14, 'How Prakash is working?', '', 0, 'N');
 
 -- --------------------------------------------------------
 
@@ -137,9 +139,9 @@ CREATE TABLE `user_mst` (
 
 INSERT INTO `user_mst` (`ID`, `USER_NAME`, `PWD`, `IS_ACTIVE`, `IS_ADMIN`) VALUES
 (1, 'admin', 'admin', 'Y', 'Y'),
-(12, 'ramesh@gmail.com', 'ramesh', 'Y', 'N'),
-(13, 'bharat@gmail.com', 'bharat', 'Y', 'N'),
-(14, 'vinay@gmail.com', 'vinay', 'Y', 'N');
+(15, 'prakash@gmail.com', 'prakash', 'Y', 'N'),
+(16, 'bikash@gmail.com', 'bikash', 'Y', 'N'),
+(17, 'rajesh@gmail.com', 'rajesh', 'Y', 'N');
 
 -- --------------------------------------------------------
 
@@ -253,17 +255,17 @@ ALTER TABLE `user_mst`
 -- AUTO_INCREMENT for table `emp_mst`
 --
 ALTER TABLE `emp_mst`
-  MODIFY `EMP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `EMP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `emp_performance_mst`
 --
 ALTER TABLE `emp_performance_mst`
-  MODIFY `PERFORMANCE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `PERFORMANCE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `user_mst`
 --
 ALTER TABLE `user_mst`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- Constraints for dumped tables
 --
