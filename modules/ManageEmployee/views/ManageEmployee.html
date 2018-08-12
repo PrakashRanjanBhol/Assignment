@@ -1,0 +1,158 @@
+<title>Manage Employee</title>
+<div ng-include="'common/header.html'"></div>
+
+
+<div class="container" style="margin-top:30px">
+<div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default">
+  <div class="panel-heading"><h3 class="panel-title"><strong>Add Employee </strong></h3>
+      
+  </div>
+  
+  <div class="panel-body">
+   <form role="form">
+ 
+            <div class="row">
+    			<div class="col-xs-12 col-sm-4 col-md-4">
+					<div class="form-group">
+            <label>First Name</label>
+                        <input type="text" ng-model="first_name" class="form-control" placeholder="First Name" tabindex="1">
+					</div>
+				</div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+    				<div class="form-group">
+              <label>Middle Name</label>
+                        <input type="text" ng-model="middle_name" class="form-control" placeholder="Middle Name" tabindex="2">
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-4">
+					<div class="form-group">
+            <label>Last Name</label>
+						<input type="text" ng-model="last_name" class="form-control " placeholder="Last Name" tabindex="3">
+					</div>
+				</div>
+
+
+
+
+
+         <div class="col-xs-12 col-sm-4 col-md-4">
+          <div class="form-group">
+            <label>Email Id</label>
+                        <input type="text" ng-model="email_id" ng-change="EmailValidation()" class="form-control" placeholder="Email Id" tabindex="4" ng-disabled="email_id_update">
+          </div>
+        </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+            <div class="form-group">
+              <label>Mobile No</label>
+                        <input type="text" ng-model="mobile_no" class="form-control" placeholder="Mobile No" tabindex="5">
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4">
+          <div class="form-group">
+            <label>Address</label>
+            <input type="text"  ng-model="address" class="form-control " placeholder="Address" tabindex="6">
+          </div>
+        </div>
+
+
+
+
+
+        <div class="col-xs-12 col-sm-4 col-md-4">
+          <div class="form-group">
+            <label>Password</label>
+                        <input type="password" ng-model="password" class="form-control" placeholder="Password" tabindex="7">
+          </div>
+        </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+            <div class="form-group">
+              <label>Confirm Password</label>
+                        <input type="password" ng-model="confirm_password" class="form-control" placeholder="Confirm Password" tabindex="8">
+          </div>
+        </div>
+
+			</div>
+
+              <div class="col-xs-6">                            
+  <button type="button" class="btn btn-success" ng-click="AddEmployee()" ng-show="operationType">Add Employee</button>
+  <button type="button" class="btn btn-success" ng-click="EditEmployee()" ng-hide="operationType">Update Employee</button>
+  <button type="button" class="btn btn-danger" ng-click="CancelUpdate()" ng-hide="operationType">Cancel</button>
+</div>  
+</form>
+  </div>
+</div>
+
+
+
+
+
+
+
+ <div class="panel panel-default">
+<div class="panel-heading"><h3 class="panel-title"><strong>Employee List</strong></h3>
+      
+  </div>
+<div class="card-block p-0">
+                <table class="table table-bordered table-sm m-0">
+                    <thead class="">
+                        <tr>
+                            <th>Name</th>
+                            <th>Email Id</th>
+                            <th>Mobile No</th>
+                            <th>Address</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr ng-repeat="employeeList in employeeList">
+                            <td>{{employeeList.first_name}} {{employeeList.middle_name}} {{employeeList.last_name}}</td>
+                            <td>{{employeeList.email_id}}</td>
+                            <td>{{employeeList.mobile_no}}</td>
+                            <td>{{employeeList.address}}</td>
+                            <td>
+                            <button type="button" class="btn btn-info" ng-click="UpdateEmployee(employeeList)">Update</button>
+                            <button type="button" class="btn btn-danger" ng-click="DeleteEmployee(employeeList)">Delete</button>
+                            </td>
+                        </tr>
+              
+                    </tbody>
+                </table>
+            </div>
+          </div>
+
+
+
+
+
+  <div modal="showModal">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" ng-click="cancelModal()">&times;</button>
+          <h4 class="modal-title">Delete Employee</h4>
+        </div>
+        <div class="modal-body">
+          <p>Are You Sure You Want To Delete The Employee?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" ng-click="DeleteOkay()">Okay</button>
+          <button type="button" class="btn btn-danger" ng-click="cancelModal()">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+
+
+
+
+        </div>
+      </div>
+</div>
+</div>

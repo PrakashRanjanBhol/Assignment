@@ -1,0 +1,227 @@
+<title>Performance Review</title>
+<div ng-include="'common/header.html'"></div>
+
+
+<div class="container" style="margin-top:30px">
+<div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default">
+  <div class="panel-heading"><h3 class="panel-title"><strong>Assign For Review</strong></h3>
+      
+  </div>
+  
+  <div class="panel-body">
+   <form role="form">
+ 
+            <div class="row">
+    			<div class="col-xs-12 col-sm-4 col-md-4">
+					<div class="form-group">
+            <label>Review From</label>
+<select class="form-control" ng-options="item.emp_id as item.first_name for item in employeeList"  ng-model="review_from" ng-change="VerifyBothEmpId(1)">
+    <option value="">Please Select Employee</option>
+</select>
+					</div>
+				</div>
+
+
+
+<div class="col-xs-12 col-sm-4 col-md-4">
+          <div class="form-group">
+            <label>Review To</label>
+<select class="form-control" ng-options="item.emp_id as item.first_name for item in employeeList"  ng-model="review_to" ng-change="VerifyBothEmpId(2)">
+    <option value="">Please Select Employee</option>
+</select>
+          </div>
+        </div>
+
+
+
+
+
+               <div class="col-xs-12 col-sm-4 col-md-4">
+    				<div class="form-group">
+              <label>Subject</label>
+                        <input type="text" ng-model="subject" class="form-control" placeholder="Subject">
+					</div>
+				</div>
+
+
+                <!--<div class="col-xs-12 col-sm-4 col-md-4">
+    				<div class="form-group">
+                        <textarea class="form-control" rows="3" ng-model="description" placeholder="Description"></textarea>
+					</div>
+				</div>-->
+				
+
+        
+
+			</div>
+
+              <div class="col-xs-6">                            
+  <button type="button" class="btn btn-success" ng-click="AssignReview()">Assign Review</button>
+
+</div>  
+</form>
+  </div>
+</div>
+
+
+
+
+
+
+
+ <div class="panel panel-default">
+<div class="panel-heading"><h3 class="panel-title"><strong>Employee's Review List</strong></h3>
+      
+  </div>
+<div class="card-block p-0">
+                <table class="table table-bordered table-sm m-0">
+                    <thead class="">
+                        <tr>
+                            <th>Review From</th>
+                            <th>Review To</th>
+                            <th>Subject</th>
+                            <th>Review</th>
+                            <th>Ratings</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr ng-repeat="empPerformanceList in empPerformanceList" ng-class="{'statusPending': empPerformanceList.review_status == 'N'}">
+                            <td>{{empPerformanceList.review_from_name}}</td>
+                            <td>{{empPerformanceList.review_to_name}}</td>
+                            <td>{{empPerformanceList.subject}}</td>
+                            <td>{{empPerformanceList.review}}</td>
+                            <td>
+                            <span >
+                              <div class="rating" ng-if="empPerformanceList.review_status == 'N'">
+                                <label id="stars{{empPerformanceList.performance_id}}id{{$index}}" ng-click="f1($index,empPerformanceList.performance_id)" ng-repeat="n in [] | range:10" class="stars{{empPerformanceList.performance_id}}"></label>
+                                </div>
+
+                               <div class="rating" ng-if="empPerformanceList.review_status == 'Y'">
+                                <label ng-class="{'ratingColor': empPerformanceList.ratings > $index}" ng-repeat="n in [] | range:10"></label>
+                                </div>
+                            </span>
+                           </td>
+                            <td>
+                            <button type="button" class="btn btn-info" ng-click="OpenUpdateModal(empPerformanceList)">Update</button>
+                            </td>
+                        </tr>
+              
+                    </tbody>
+                </table>
+            </div>
+          </div>
+
+
+
+
+
+
+
+  <div modal="showModal">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" ng-click="cancelModal()">&times;</button>
+          <h4 class="modal-title">Update Review</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+          <div class="col-xs-6">
+            <label>Review From</label>
+            <input type="text" value="{{empPerformanceObj.review_from_name}}" class="form-control" readonly="true">
+          </div>
+
+          <div class="col-xs-6">
+            <label>Review To</label>
+            <input type="text" value="{{empPerformanceObj.review_to_name}}" class="form-control" readonly="true">
+          </div>
+
+          <div class="col-xs-6">
+            <label>Subject</label>
+            <input type="text" ng-model="empPerformanceObj.subject" class="form-control">
+          </div>
+
+          <div class="col-xs-6">
+            <label>Review</label>
+            <input type="text" ng-model="empPerformanceObj.review" class="form-control">
+          </div>
+
+          <div class="col-xs-12">
+            <label>Rating</label>
+            <span >
+                              <div class="rating">
+                                <label id="starss{{empPerformanceObj.performance_id}}id{{$index}}" ng-click="f2($index,empPerformanceObj.performance_id)" ng-repeat="n in [] | range:10" class="stars{{empPerformanceObj.performance_id}}" ng-class="{'ratingColor': empPerformanceObj.ratings > $index}"></label>
+                                </div>
+
+                               <!-- <div class="rating" ng-if="empPerformanceObj.review_status == 'Y'">
+                                <label ng-class="{'ratingColor': empPerformanceObj.ratings > $index}" ng-repeat="n in [] | range:10"></label>
+                                </div> -->
+                            </span>
+          </div>
+
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" ng-click="UpdateReview()">Update</button>
+          <button type="button" class="btn btn-danger" ng-click="cancelModal()">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+
+
+
+        </div>
+      </div>
+</div>
+</div>
+
+<style>
+
+.statusPending
+{
+background-color: #b39c9c;
+}
+
+
+
+.reviewCompleted
+{
+  background-color: #a9a9a9;
+}
+
+.rating {
+     /* float:left;*/
+      color:#ddd;
+    }
+
+    .rating:not(:checked) > label {
+       /* float:right;*/
+        width:1em;
+        /* padding:0 .1em; */
+        overflow:hidden;
+        white-space:nowrap;
+        cursor:pointer;
+        font-size:150%;
+        /* line-height:1.2; */
+        /*color:#ddd;*/
+    }
+
+    .rating:not(:checked) > label:before {
+        content: '★ ';
+    }
+
+        .ratingColor
+    {
+color:dodgerblue;
+    }
+  </style>

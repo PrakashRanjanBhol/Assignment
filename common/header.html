@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="css/home.css" />
+<ul style="margin-left:100px;margin-right:83px;" ng-if="globals.currentUser.obj.is_admin=='Y'">
+  <li><a href="#ManageEmployee">Employee Management</a></li>
+  <li><a href="#PerformanceReview">Performance Review</a></li>
+ 
+  <li style="float:right"><a href="#login">Log Out</a></li>
+</ul>
+
+
+<ul style="margin-left:100px;margin-right:83px;" ng-if="globals.currentUser.obj.is_admin=='N'">
+  <li><a href="#AddReview">Add Performance Review</a></li>
+  <li style="float:right"><a href="#login">Log Out</a></li>
+</ul>

@@ -1,0 +1,98 @@
+<title>Add Review</title>
+<div ng-include="'common/header.html'"></div>
+
+
+<div class="container" style="margin-top:30px">
+<div class="col-md-10 col-md-offset-1">
+   
+ <div class="panel panel-default">
+<div class="panel-heading"><h3 class="panel-title"><strong>Employee's Review List</strong></h3>
+      
+  </div>
+<div class="card-block p-0">
+                <table class="table table-bordered table-sm m-0">
+                    <thead class="">
+                        <tr>
+                            <th>Review To</th>
+                            <th>Subject</th>
+                            <th>Review</th>
+                            <th>Ratings</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr ng-repeat="empPerformanceList in empPerformanceList" ng-class="{'reviewCompleted': empPerformanceList.review_status == 'Y'}">
+                            <td>{{empPerformanceList.review_to_name}}</td>
+                            <td>{{empPerformanceList.subject}}</td>
+                            <td>
+                            <span ng-if="empPerformanceList.review_status == 'N'">
+                            <textarea class="form-control" rows="2" id="feedback{{$index}}"></textarea>
+                            </span>
+                            <span ng-if="empPerformanceList.review_status == 'Y'">{{empPerformanceList.review}}</span>
+                            </td>
+                          
+                           <td>
+                            <span >
+                            	<div class="rating" ng-if="empPerformanceList.review_status == 'N'">
+                                <label id="stars{{empPerformanceList.performance_id}}id{{$index}}" ng-click="f1($index,empPerformanceList.performance_id)" ng-repeat="n in [] | range:10" class="stars{{empPerformanceList.performance_id}}"></label>
+                                </div>
+
+                               <div class="rating" ng-if="empPerformanceList.review_status == 'Y'">
+                                <label ng-class="{'ratingColor': empPerformanceList.ratings > $index}" ng-repeat="n in [] | range:10"></label>
+                                </div>
+
+
+                            </span>
+                           </td>
+
+                            <td>
+                            <button type="button" class="btn btn-info" ng-if="empPerformanceList.review_status == 'N'" ng-click="AddFeedback(empPerformanceList,$index)">Add Review</button>
+                            </td>
+                        </tr>
+              
+                    </tbody>
+                </table>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+</div>
+</div>
+
+<style>
+
+.reviewCompleted
+{
+	background-color: #a9a9a9;
+}
+
+.rating {
+      float:left;
+      color:#ddd;
+    }
+
+    .rating:not(:checked) > label {
+       /* float:right;*/
+        width:1em;
+        /* padding:0 .1em; */
+        overflow:hidden;
+        white-space:nowrap;
+        cursor:pointer;
+        font-size:150%;
+        /* line-height:1.2; */
+        /*color:#ddd;*/
+    }
+
+    .rating:not(:checked) > label:before {
+        content: '★ ';
+    }
+
+        .ratingColor
+    {
+color:dodgerblue;
+    }
+</style>
